@@ -17,11 +17,11 @@ import {
 } from 'lucide-react';
 
 const mockJobs = [
-  { id: 1, title: 'Software Engineer', company: 'HSBC', salary: 'To Be Announced', match: 95, location: 'Bangalore/Hyderabad', reason: 'Strong overlap in React and Python stack.', deadline: '16 MAR 2026' },
-  { id: 2, title: 'SDE Intern', company: 'project44', salary: '₹ 1.35L PM', match: 88, location: 'Chennai', reason: 'UI/UX experience aligns perfectly with role.', deadline: '30 JUN 2026' },
-  { id: 3, title: 'Frontend Developer', company: 'Groww', salary: '₹ 26L PA', match: 82, location: 'Bangalore', reason: 'Lacks Hadoop, but Python/SQL skills match.', deadline: '4 JUL 2026' },
-  { id: 4, title: 'Backend Engineer', company: 'Value Labs', salary: '₹ 22L PA', match: 79, location: 'Hyderabad', reason: 'Missing Go experience required for core services.', deadline: '4 JUL 2026' },
-  { id: 5, title: 'Full Stack Engineer', company: 'Razorpay', salary: '₹ 32L PA', match: 91, location: 'Remote', reason: 'Next.js and FastAPI experience is highly relevant.', deadline: '15 AUG 2026' },
+  { id: 1, title: 'Software Development Engineer I', company: 'CRED', salary: '₹ 16L - 20L PA', match: 95, location: 'Bangalore, Karnataka', reason: 'Strong overlap in React and Python stack. Previous fintech experience is a huge plus.', deadline: '16 MAR 2026' },
+  { id: 2, title: 'Frontend Engineer (React)', company: 'Meesho', salary: '₹ 14L - 18L PA', match: 88, location: 'Bangalore, Karnataka', reason: 'UI/UX experience aligns perfectly with role. Excellent TypeScript background.', deadline: '30 JUN 2026' },
+  { id: 3, title: 'Backend Software Engineer', company: 'Postman', salary: '₹ 18L PA', match: 82, location: 'Remote, India', reason: 'Lacks Hadoop, but Python/SQL and API design skills strongly match.', deadline: '4 JUL 2026' },
+  { id: 4, title: 'SDE Intern', company: 'Razorpay', salary: '₹ 45K PM', match: 79, location: 'Bangalore / Remote', reason: 'Missing Go experience required for core services, but Node.js fits perfectly.', deadline: '4 JUL 2026' },
+  { id: 5, title: 'Data Engineer I', company: 'Zeta', salary: '₹ 12L - 16L PA', match: 91, location: 'Hyderabad, Telangana', reason: 'AWS and data pipeline experience is highly relevant for this banking role.', deadline: '15 AUG 2026' },
 ];
 
 const CircularProgress = ({ value }: { value: number }) => {
