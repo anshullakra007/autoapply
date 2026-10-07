@@ -1,0 +1,16 @@
+fastapi[all]
+sqlalchemy
+playwright
+playwright-stealth
+beautifulsoup4
+sentence-transformers
+spacy
+pdfplumber
+apscheduler
+pytest
+celery
+redis
+openai
+pgvector
+psycopg2-binary
+requests
