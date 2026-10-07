@@ -60,6 +60,9 @@ export default function Dashboard() {
   const [isDragging, setIsDragging] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [activeJob, setActiveJob] = useState<any>(null);
+  const [jobs, setJobs] = useState<any[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [coverLetter, setCoverLetter] = useState<string | null>(null);
   
   // Real file input reference
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -69,7 +72,17 @@ export default function Dashboard() {
     const interval = setInterval(() => {
       progress += 5;
       setUploadProgress(progress);
-      if (progress >= 100) clearInterval(interval);
+      if (progress >= 100) {
+        clearInterval(interval);
+        // Simulate dynamic backend match generation
+        setTimeout(() => {
+          setJobs(mockJobs.map(job => ({
+            ...job,
+            // Randomize match slightly to simulate live processing
+            match: Math.floor(Math.random() * (98 - 75 + 1) + 75)
+          })).sort((a, b) => b.match - a.match));
+        }, 500);
+      }
     }, 100);
   };
 
@@ -85,6 +98,19 @@ export default function Dashboard() {
     if (e.target.files && e.target.files.length > 0) {
       simulateUpload();
     }
+  };
+
+  const handleGenerateCoverLetter = () => {
+    setIsGenerating(true);
+    setTimeout(() => {
+      setCoverLetter(`Dear Hiring Manager at ${activeJob.company},\n\nI am writing to express my strong interest in the ${activeJob.title} position at ${activeJob.company}. With my background in software engineering and a proven track record of delivering scalable solutions, I am confident in my ability to contribute effectively to your team.\n\nMy experience aligns well with the requirements for this role, and I am particularly drawn to ${activeJob.company}'s innovative approach in the industry. I have successfully built and optimized applications using modern frameworks, ensuring high performance and user satisfaction.\n\nI would welcome the opportunity to discuss how my skills and experiences can bring value to your engineering team. Thank you for considering my application.\n\nSincerely,\n[Your Name]`);
+      setIsGenerating(false);
+    }, 2000);
+  };
+
+  const handleClosePanel = () => {
+    setActiveJob(null);
+    setCoverLetter(null);
   };
 
   return (
@@ -134,7 +160,7 @@ export default function Dashboard() {
             />
             
             <div className="p-12 flex flex-col items-center justify-center text-center">
-              {uploadProgress > 0 ? (
+              {uploadProgress > 0 && uploadProgress < 100 ? (
                 <div className="w-full max-w-md space-y-4">
                   <div className="flex justify-between text-sm font-medium">
                     <span className="text-indigo-600">Analyzing your resume...</span>
@@ -148,6 +174,14 @@ export default function Dashboard() {
                     />
                   </div>
                 </div>
+              ) : uploadProgress === 100 ? (
+                <>
+                  <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mb-4 border border-emerald-100">
+                    <CheckCircle className="w-8 h-8 text-emerald-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2 text-gray-800">Resume Analyzed!</h3>
+                  <p className="text-gray-500 text-sm">We've found {jobs.length} great matches for you below.</p>
+                </>
               ) : (
                 <>
                   <div className="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mb-4 border border-indigo-100">
@@ -162,60 +196,62 @@ export default function Dashboard() {
         </section>
 
         {/* Job Feed Grid */}
-        <section className="relative z-10 space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl font-semibold flex items-center gap-2 text-gray-800">
-              <Play className="w-4 h-4 text-emerald-500" /> Latest Job Matches
-            </h3>
-            <div className="flex items-center gap-2 text-xs font-medium text-gray-600 bg-white shadow-sm px-3 py-1.5 rounded-full border border-gray-200">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Live Updates
+        {jobs.length > 0 && (
+          <section className="relative z-10 space-y-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xl font-semibold flex items-center gap-2 text-gray-800">
+                <Play className="w-4 h-4 text-emerald-500" /> Latest Job Matches
+              </h3>
+              <div className="flex items-center gap-2 text-xs font-medium text-gray-600 bg-white shadow-sm px-3 py-1.5 rounded-full border border-gray-200">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                Live Updates
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {mockJobs.map((job, i) => (
-              <motion.div 
-                key={job.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                onClick={() => setActiveJob(job)}
-                className="group cursor-pointer bg-white border border-gray-200 shadow-sm hover:shadow-md p-6 rounded-2xl transition-all relative overflow-hidden"
-              >
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <h4 className="text-lg font-bold text-gray-900 mb-1 line-clamp-1">{job.title}</h4>
-                    <p className="text-sm text-gray-600">{job.company}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {jobs.map((job, i) => (
+                <motion.div 
+                  key={job.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  onClick={() => setActiveJob(job)}
+                  className="group cursor-pointer bg-white border border-gray-200 shadow-sm hover:shadow-md p-6 rounded-2xl transition-all relative overflow-hidden"
+                >
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h4 className="text-lg font-bold text-gray-900 mb-1 line-clamp-1">{job.title}</h4>
+                      <p className="text-sm text-gray-600">{job.company}</p>
+                    </div>
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 font-bold text-sm border border-indigo-100">
+                      {job.match}%
+                    </div>
                   </div>
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 font-bold text-sm border border-indigo-100">
-                    {job.match}%
-                  </div>
-                </div>
 
-                <div className="space-y-3 text-sm text-gray-600 mb-6 border-t border-gray-100 pt-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-500 text-xs uppercase font-semibold">Salary</span>
-                    <span className="font-medium text-gray-800">{job.salary}</span>
+                  <div className="space-y-3 text-sm text-gray-600 mb-6 border-t border-gray-100 pt-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500 text-xs uppercase font-semibold">Salary</span>
+                      <span className="font-medium text-gray-800">{job.salary}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500 text-xs uppercase font-semibold">Location</span>
+                      <span className="font-medium text-gray-800">{job.location}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500 text-xs uppercase font-semibold">Apply Before</span>
+                      <span className="font-medium text-gray-800">{job.deadline}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-500 text-xs uppercase font-semibold">Location</span>
-                    <span className="font-medium text-gray-800">{job.location}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-500 text-xs uppercase font-semibold">Apply Before</span>
-                    <span className="font-medium text-gray-800">{job.deadline}</span>
-                  </div>
-                </div>
 
-                <div className="p-3 bg-indigo-50/50 rounded-xl border border-indigo-50">
-                  <div className="text-[10px] uppercase text-indigo-500 font-semibold mb-1 tracking-wider">Why it's a match</div>
-                  <p className="text-xs text-gray-700 leading-relaxed line-clamp-2">{job.reason}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+                  <div className="p-3 bg-indigo-50/50 rounded-xl border border-indigo-50">
+                    <div className="text-[10px] uppercase text-indigo-500 font-semibold mb-1 tracking-wider">Why it's a match</div>
+                    <p className="text-xs text-gray-700 leading-relaxed line-clamp-2">{job.reason}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       {/* Slide-out Panel */}
@@ -226,7 +262,7 @@ export default function Dashboard() {
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }}
-              onClick={() => setActiveJob(null)}
+              onClick={handleClosePanel}
               className="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-50"
             />
             <motion.div 
@@ -237,7 +273,7 @@ export default function Dashboard() {
               className="fixed top-0 right-0 h-full w-full max-w-2xl bg-white border-l border-gray-200 shadow-2xl z-50 overflow-y-auto"
             >
               <div className="p-8">
-                <button onClick={() => setActiveJob(null)} className="mb-8 p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full transition-colors">
+                <button onClick={handleClosePanel} className="mb-8 p-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full transition-colors">
                   <X className="w-5 h-5" />
                 </button>
 
@@ -269,10 +305,25 @@ export default function Dashboard() {
                   <div className="space-y-4">
                     <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 border-b border-gray-100 pb-2">Cover Letter Generator</h3>
                     <p className="text-sm text-gray-600">Generate a personalized cover letter based on your experience and this job.</p>
-                    <button className="w-full flex items-center justify-center gap-2 py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-colors shadow-sm">
-                      <FileText className="w-4 h-4" />
-                      Generate Cover Letter
-                    </button>
+                    
+                    {!coverLetter ? (
+                      <button 
+                        onClick={handleGenerateCoverLetter}
+                        disabled={isGenerating}
+                        className="w-full flex items-center justify-center gap-2 py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-colors shadow-sm disabled:opacity-50"
+                      >
+                        {isGenerating ? (
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        ) : (
+                          <FileText className="w-4 h-4" />
+                        )}
+                        {isGenerating ? 'Generating...' : 'Generate Cover Letter'}
+                      </button>
+                    ) : (
+                      <div className="p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">
+                        {coverLetter}
+                      </div>
+                    )}
                   </div>
                 </div>
 
