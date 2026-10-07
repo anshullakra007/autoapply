@@ -84,10 +84,7 @@ export default function Dashboard() {
         
         <nav className="flex flex-col gap-6 w-full px-6 text-gray-400">
           {[
-            { icon: Home, label: 'Home', active: true },
-            { icon: Briefcase, label: 'Matches' },
-            { icon: Bookmark, label: 'Saved' },
-            { icon: BarChart2, label: 'Analytics' }
+            { icon: Home, label: 'Home', active: true }
           ].map((item, i) => (
             <button key={i} className={`flex items-center gap-4 p-2 rounded-lg transition-all ${item.active ? 'text-blue-400 bg-blue-500/10' : 'hover:text-gray-200 hover:bg-white/5'}`}>
               <item.icon className="w-5 h-5 shrink-0" />
@@ -105,8 +102,8 @@ export default function Dashboard() {
         {/* Hero / Upload Section */}
         <section className="relative z-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-            <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500 mb-2">Neural Match Engine</h1>
-            <p className="text-gray-400">Upload your resume to deploy the stealth web scraper & semantic analyzer.</p>
+            <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500 mb-2">Job Matcher</h1>
+            <p className="text-gray-400">Upload your resume to find jobs that perfectly match your skills.</p>
           </motion.div>
 
           <div 
@@ -121,7 +118,7 @@ export default function Dashboard() {
               {uploadProgress > 0 ? (
                 <div className="w-full max-w-md space-y-4">
                   <div className="flex justify-between text-sm font-medium">
-                    <span className="text-blue-400">Extracting entities & vectorizing...</span>
+                    <span className="text-blue-400">Analyzing your resume...</span>
                     <span>{uploadProgress}%</span>
                   </div>
                   <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden">
@@ -137,8 +134,8 @@ export default function Dashboard() {
                   <div className="w-16 h-16 bg-white/5 rounded-full flex items-center justify-center mb-4 border border-white/10">
                     <UploadCloud className="w-8 h-8 text-blue-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">Initialize Parsing Protocol</h3>
-                  <p className="text-gray-500 text-sm">Drag & drop PDF • Semantic matching initialized automatically</p>
+                  <h3 className="text-xl font-semibold mb-2">Upload Your Resume</h3>
+                  <p className="text-gray-500 text-sm">Drag & drop your PDF resume here to get started</p>
                 </>
               )}
             </div>
@@ -149,11 +146,11 @@ export default function Dashboard() {
         <section className="relative z-10 space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-semibold flex items-center gap-2">
-              <Play className="w-4 h-4 text-emerald-400" /> Live Data Stream
+              <Play className="w-4 h-4 text-emerald-400" /> Latest Job Matches
             </h3>
             <div className="flex items-center gap-2 text-xs font-mono text-gray-500 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              Scraping 24/7
+              Live Updates
             </div>
           </div>
 
@@ -179,17 +176,17 @@ export default function Dashboard() {
 
                 <div className="space-y-2 text-xs text-gray-500 mb-6">
                   <div className="flex justify-between">
-                    <span>SALARY</span>
+                    <span>Salary</span>
                     <span className="text-gray-300 font-medium">{job.salary}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>LOC</span>
+                    <span>Location</span>
                     <span className="text-gray-300 font-medium">{job.location}</span>
                   </div>
                 </div>
 
                 <div className="p-3 bg-white/5 rounded-xl border border-white/5 group-hover:border-white/10 transition-colors">
-                  <div className="text-[10px] uppercase text-gray-500 mb-1 tracking-wider">AI Analysis</div>
+                  <div className="text-[10px] uppercase text-gray-500 mb-1 tracking-wider">Why it's a match</div>
                   <p className="text-xs text-gray-300 font-sans leading-relaxed line-clamp-2">{job.reason}</p>
                 </div>
               </motion.div>
@@ -233,7 +230,7 @@ export default function Dashboard() {
 
                 <div className="grid grid-cols-2 gap-8 mb-8">
                   <div className="space-y-4">
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 border-b border-white/10 pb-2">ATS Gap Analysis</h3>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 border-b border-white/10 pb-2">Resume Feedback</h3>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-2 text-sm">
                         <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
@@ -247,19 +244,19 @@ export default function Dashboard() {
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 border-b border-white/10 pb-2">AI Cover Letter</h3>
-                    <p className="text-sm text-gray-400 italic">Generate a highly personalized letter mapping your B.Tech projects to this role.</p>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 border-b border-white/10 pb-2">Cover Letter Generator</h3>
+                    <p className="text-sm text-gray-400 italic">Generate a personalized cover letter based on your experience and this job.</p>
                     <button className="w-full flex items-center justify-center gap-2 py-3 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                       <FileText className="w-4 h-4" />
-                      Stream Cover Letter
+                      Generate Cover Letter
                     </button>
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 border-b border-white/10 pb-2">Raw Job Description</h3>
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500 border-b border-white/10 pb-2">Job Description</h3>
                   <div className="p-4 bg-white/5 border border-white/10 rounded-xl text-sm text-gray-400 font-mono leading-relaxed h-64 overflow-y-auto">
-                    [Scraped Content] We are looking for a highly skilled {activeJob.title} to join our core team at {activeJob.company}. You will be responsible for architecting scalable solutions, optimizing performance, and building seamless user experiences...
+                    We are looking for a highly skilled {activeJob.title} to join our core team at {activeJob.company}. You will be responsible for architecting scalable solutions, optimizing performance, and building seamless user experiences...
                   </div>
                 </div>
               </div>
