@@ -2,14 +2,13 @@ from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import List
-from app.services.scraper import SEED_URLS
 # from app.worker import run_scraping_pipeline # Celery task
 from app.services.ai import analyze_ats_gap, stream_cover_letter
 
 router = APIRouter()
 
 class SyncJobsRequest(BaseModel):
-    urls: List[str] = SEED_URLS
+    urls: List[str] = []
 
 @router.post("/jobs/sync")
 async def sync_jobs(req: SyncJobsRequest):
