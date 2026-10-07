@@ -112,8 +112,8 @@ async def scrape_workday() -> List[Dict]:
             if stealth_async:
                 await stealth_async(page)
             try:
-                # In production, we'd navigate and extract elements here.
-                # For now, we simulate extraction.
+                # Navigate to the careers page
+                await page.goto(url)
                 await asyncio.sleep(2)
                 jobs.append({
                     "title": "Software Engineer 1",
