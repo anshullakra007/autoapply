@@ -17,11 +17,11 @@ import {
 } from 'lucide-react';
 
 const mockJobs = [
-  { id: 1, title: 'Software Engineer', company: 'TechNova', salary: '$120k - $150k', match: 95, location: 'Remote', reason: 'Strong overlap in React and Python stack.' },
-  { id: 2, title: 'Frontend Developer', company: 'PixelForge', salary: '$110k - $130k', match: 88, location: 'San Francisco, CA', reason: 'UI/UX experience aligns perfectly with role.' },
-  { id: 3, title: 'Data Scientist', company: 'QuantMinds', salary: '$130k - $160k', match: 82, location: 'New York, NY', reason: 'Lacks Hadoop, but Python/SQL skills match.' },
-  { id: 4, title: 'Backend Engineer', company: 'CloudSync', salary: '$115k - $140k', match: 79, location: 'Austin, TX', reason: 'Missing Go experience required for core services.' },
-  { id: 5, title: 'Full Stack Engineer', company: 'WebSphere', salary: '$125k - $155k', match: 91, location: 'Remote', reason: 'Next.js and FastAPI experience is highly relevant.' },
+  { id: 1, title: 'Software Engineer', company: 'HSBC', salary: 'To Be Announced', match: 95, location: 'Bangalore/Hyderabad', reason: 'Strong overlap in React and Python stack.', deadline: '16 MAR 2026' },
+  { id: 2, title: 'SDE Intern', company: 'project44', salary: '₹ 1.35L PM', match: 88, location: 'Chennai', reason: 'UI/UX experience aligns perfectly with role.', deadline: '30 JUN 2026' },
+  { id: 3, title: 'Frontend Developer', company: 'Groww', salary: '₹ 26L PA', match: 82, location: 'Bangalore', reason: 'Lacks Hadoop, but Python/SQL skills match.', deadline: '4 JUL 2026' },
+  { id: 4, title: 'Backend Engineer', company: 'Value Labs', salary: '₹ 22L PA', match: 79, location: 'Hyderabad', reason: 'Missing Go experience required for core services.', deadline: '4 JUL 2026' },
+  { id: 5, title: 'Full Stack Engineer', company: 'Razorpay', salary: '₹ 32L PA', match: 91, location: 'Remote', reason: 'Next.js and FastAPI experience is highly relevant.', deadline: '15 AUG 2026' },
 ];
 
 const CircularProgress = ({ value }: { value: number }) => {
@@ -182,6 +182,10 @@ export default function Dashboard() {
                   <div className="flex justify-between">
                     <span>Location</span>
                     <span className="text-gray-300 font-medium">{job.location}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Apply Before</span>
+                    <span className="text-gray-300 font-medium">{job.deadline}</span>
                   </div>
                 </div>
 
