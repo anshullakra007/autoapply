@@ -27,7 +27,7 @@ const mockJobs = [
     location: 'Bangalore, Karnataka', 
     reason: 'Strong overlap in React and Python stack. Previous fintech experience is a huge plus.', 
     deadline: '20 NOV 2026',
-    link: 'https://careers.cred.club/',
+    link: 'https://boards.greenhouse.io/cred/jobs/4231920?gh_src=autoapply',
     description: 'CRED is looking for a passionate SDE I to build high-scale, low-latency fintech systems. You will work on architecting solutions for millions of members, integrating payment gateways, and ensuring bank-grade security.' 
   },
   { 
@@ -39,7 +39,7 @@ const mockJobs = [
     location: 'Bangalore, Karnataka', 
     reason: 'UI/UX experience aligns perfectly with role. Excellent TypeScript background.', 
     deadline: '05 DEC 2026',
-    link: 'https://meesho.io/jobs',
+    link: 'https://jobs.lever.co/meesho/1a2b3c4d-5e6f-7g8h-9i0j-frontend-engineer-react/apply',
     description: 'Join Meesho to democratize internet commerce in India. You will build highly responsive, mobile-first web applications using React and Next.js, optimizing performance for next-billion users on low-end devices.' 
   },
   { 
@@ -51,7 +51,7 @@ const mockJobs = [
     location: 'Remote, India', 
     reason: 'Lacks Hadoop, but Python/SQL and API design skills strongly match.', 
     deadline: '15 DEC 2026',
-    link: 'https://www.postman.com/company/careers/',
+    link: 'https://www.postman.com/company/careers/job/?id=432912&apply=true',
     description: 'Postman is building the future of APIs. You will design, develop, and maintain highly scalable backend microservices, working heavily with Node.js, Python, and distributed data stores.' 
   },
   { 
@@ -63,7 +63,7 @@ const mockJobs = [
     location: 'Bangalore / Remote', 
     reason: 'Missing Go experience required for core services, but Node.js fits perfectly.', 
     deadline: '10 NOV 2026',
-    link: 'https://razorpay.com/jobs/',
+    link: 'https://razorpay.com/jobs/sde-intern-54321/apply',
     description: 'Kickstart your career at Razorpay. As an SDE Intern, you will be embedded in a core product team, writing production code, participating in architecture discussions, and learning how to build resilient payment systems.' 
   },
   { 
@@ -75,7 +75,7 @@ const mockJobs = [
     location: 'Hyderabad, Telangana', 
     reason: 'AWS and data pipeline experience is highly relevant for this banking role.', 
     deadline: '31 JAN 2027',
-    link: 'https://www.zeta.tech/careers/',
+    link: 'https://boards.greenhouse.io/zeta/jobs/9876543#app',
     description: 'Zeta is transforming modern banking tech. You will build scalable data pipelines, design data warehouses, and work closely with data scientists to unlock insights from petabytes of transactional data.' 
   },
 ];
