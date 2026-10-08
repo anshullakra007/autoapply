@@ -13,15 +13,71 @@ import {
   Wand2,
   ChevronRight,
   X,
-  Play
+  Play,
+  ExternalLink
 } from 'lucide-react';
 
 const mockJobs = [
-  { id: 1, title: 'Software Development Engineer I', company: 'CRED', salary: '₹ 16L - 20L PA', match: 95, location: 'Bangalore, Karnataka', reason: 'Strong overlap in React and Python stack. Previous fintech experience is a huge plus.', deadline: '20 NOV 2026' },
-  { id: 2, title: 'Frontend Engineer (React)', company: 'Meesho', salary: '₹ 14L - 18L PA', match: 88, location: 'Bangalore, Karnataka', reason: 'UI/UX experience aligns perfectly with role. Excellent TypeScript background.', deadline: '05 DEC 2026' },
-  { id: 3, title: 'Backend Software Engineer', company: 'Postman', salary: '₹ 18L PA', match: 82, location: 'Remote, India', reason: 'Lacks Hadoop, but Python/SQL and API design skills strongly match.', deadline: '15 DEC 2026' },
-  { id: 4, title: 'SDE Intern', company: 'Razorpay', salary: '₹ 45K PM', match: 79, location: 'Bangalore / Remote', reason: 'Missing Go experience required for core services, but Node.js fits perfectly.', deadline: '10 NOV 2026' },
-  { id: 5, title: 'Data Engineer I', company: 'Zeta', salary: '₹ 12L - 16L PA', match: 91, location: 'Hyderabad, Telangana', reason: 'AWS and data pipeline experience is highly relevant for this banking role.', deadline: '31 JAN 2027' },
+  { 
+    id: 1, 
+    title: 'Software Development Engineer I', 
+    company: 'CRED', 
+    salary: '₹ 16L - 20L PA', 
+    match: 95, 
+    location: 'Bangalore, Karnataka', 
+    reason: 'Strong overlap in React and Python stack. Previous fintech experience is a huge plus.', 
+    deadline: '20 NOV 2026',
+    link: 'https://careers.cred.club/',
+    description: 'CRED is looking for a passionate SDE I to build high-scale, low-latency fintech systems. You will work on architecting solutions for millions of members, integrating payment gateways, and ensuring bank-grade security.' 
+  },
+  { 
+    id: 2, 
+    title: 'Frontend Engineer (React)', 
+    company: 'Meesho', 
+    salary: '₹ 14L - 18L PA', 
+    match: 88, 
+    location: 'Bangalore, Karnataka', 
+    reason: 'UI/UX experience aligns perfectly with role. Excellent TypeScript background.', 
+    deadline: '05 DEC 2026',
+    link: 'https://meesho.io/jobs',
+    description: 'Join Meesho to democratize internet commerce in India. You will build highly responsive, mobile-first web applications using React and Next.js, optimizing performance for next-billion users on low-end devices.' 
+  },
+  { 
+    id: 3, 
+    title: 'Backend Software Engineer', 
+    company: 'Postman', 
+    salary: '₹ 18L PA', 
+    match: 82, 
+    location: 'Remote, India', 
+    reason: 'Lacks Hadoop, but Python/SQL and API design skills strongly match.', 
+    deadline: '15 DEC 2026',
+    link: 'https://www.postman.com/company/careers/',
+    description: 'Postman is building the future of APIs. You will design, develop, and maintain highly scalable backend microservices, working heavily with Node.js, Python, and distributed data stores.' 
+  },
+  { 
+    id: 4, 
+    title: 'SDE Intern', 
+    company: 'Razorpay', 
+    salary: '₹ 45K PM', 
+    match: 79, 
+    location: 'Bangalore / Remote', 
+    reason: 'Missing Go experience required for core services, but Node.js fits perfectly.', 
+    deadline: '10 NOV 2026',
+    link: 'https://razorpay.com/jobs/',
+    description: 'Kickstart your career at Razorpay. As an SDE Intern, you will be embedded in a core product team, writing production code, participating in architecture discussions, and learning how to build resilient payment systems.' 
+  },
+  { 
+    id: 5, 
+    title: 'Data Engineer I', 
+    company: 'Zeta', 
+    salary: '₹ 12L - 16L PA', 
+    match: 91, 
+    location: 'Hyderabad, Telangana', 
+    reason: 'AWS and data pipeline experience is highly relevant for this banking role.', 
+    deadline: '31 JAN 2027',
+    link: 'https://www.zeta.tech/careers/',
+    description: 'Zeta is transforming modern banking tech. You will build scalable data pipelines, design data warehouses, and work closely with data scientists to unlock insights from petabytes of transactional data.' 
+  },
 ];
 
 const CircularProgress = ({ value }: { value: number }) => {
@@ -329,15 +385,19 @@ export default function Dashboard() {
 
                 <div className="space-y-4">
                   <h3 className="text-sm font-bold uppercase tracking-wider text-gray-500 border-b border-gray-100 pb-2">Job Description</h3>
-                  <div className="p-5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 leading-relaxed h-64 overflow-y-auto">
-                    We are looking for a highly skilled {activeJob.title} to join our core team at {activeJob.company}. You will be responsible for architecting scalable solutions, optimizing performance, and building seamless user experiences.
-                    <br/><br/>
-                    Requirements:
-                    <ul className="list-disc pl-5 mt-2 space-y-1">
-                      <li>Proven experience in frontend and backend development.</li>
-                      <li>Strong problem-solving skills.</li>
-                      <li>Ability to work in a fast-paced environment.</li>
-                    </ul>
+                  <div className="p-5 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 leading-relaxed">
+                    {activeJob.description}
+                  </div>
+                  
+                  <div className="pt-4">
+                    <a 
+                      href={activeJob.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2 py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-black transition-colors shadow-lg shadow-gray-900/20"
+                    >
+                      Apply on Company Website <ExternalLink className="w-5 h-5" />
+                    </a>
                   </div>
                 </div>
               </div>
